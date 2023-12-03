@@ -52,15 +52,15 @@ export const login =   asyncHandler(async(req,res) =>{
 
 
     if(response && isMatch){
-        const {password, role, ...userData} = response.toObject()
+        const {password, role,refreshToken, ...userData} = response.toObject()
         // AccessToken dùng để xác thực người dùng, phân quyền
         const Accesstoken = AccessTokenUser(response._id, role)
         // refreshToken dùng để cập nhật accessToken
-        const refreshToken = RefeshTokenUser(response._id)
+        const newRefreshToken = RefeshTokenUser(response._id)
 
         // Lưu refreshToken vào db
-        await User.findByIdAndUpdate(response._id, {refreshToken}, {new:true})
-        res.cookie('refreshToken', refreshToken, {httpOnly:true, maxAge: 60*60*1000})
+        await User.findByIdAndUpdate(response._id, {refreshToken : newRefreshToken}, {new:true})
+        res.cookie('refreshToken', newRefreshToken, {httpOnly:true, maxAge: 60*60*1000})
         return res.status(200).json({
             message: "đăng nhập thành công",
             Accesstoken,
@@ -73,9 +73,6 @@ export const login =   asyncHandler(async(req,res) =>{
 
 
 export const getAllUser =   asyncHandler(async(req,res) =>{
-    const {email , password } = req.body;
- 
-    
 
     const response = await User.find({})
      if(!response || response.length === 0){
@@ -196,9 +193,35 @@ export const deleteUser =   asyncHandler(async(req,res) =>{
         return res.json(" user không tồn tại")
     }
    
-
     return res.status(200).json({
         message: "Xóa user thành công",
+        response
+    })
+})
+
+export const updateUser =   asyncHandler(async(req,res) =>{
+    const {_id} = req.user
+    if(!_id || Object.keys(req.body).length === 0) throw new Error("Missing inputs")
+    const response = await User.findByIdAndUpdate(_id, req.body, {new:true})
+    if(!response || response.length === 0) {
+        return res.json(" user không tồn tại")
+    }
+   
+    return res.status(200).json({
+        message: "Update user thành công",
+        response
+    })
+})
+export const updateUserById =   asyncHandler(async(req,res) =>{
+    const {id} = req.params
+    if(!id || Object.keys(req.body).length === 0) throw new Error("Missing inputs")
+    const response = await User.findByIdAndUpdate(id, req.body, {new:true})
+    if(!response || response.length === 0) {
+        return res.json(" user không tồn tại")
+    }
+   
+    return res.status(200).json({
+        message: "Update user thành công",
         response
     })
 })
