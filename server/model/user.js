@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';// Erase if already required
 import bcrypt from 'bcrypt'
+import crypto from 'crypto'
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
     name:{
@@ -53,6 +54,25 @@ var userSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+userSchema.methods = {
+    createPasswordChangedToken: function() {
+        const resetToken = crypto.randomBytes(32).toString("hex");
+        // Kiểm tra xem 'this' có phải là một đối tượng hợp lệ không
+        if (this) {
+            
+            this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+            this.passwordResetExpires = Date.now() + 15 * 60 * 1000;
+        } else {
+            // Xử lý khi 'this' không hợp lệ
+            console.error("Error: 'this' is undefined or null.");
+        }
+        return resetToken;
+    }
+}
+
+
+
 
 //Export the model
 export default mongoose.model('User', userSchema);
