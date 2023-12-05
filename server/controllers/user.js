@@ -97,6 +97,16 @@ export const getUserDetail = asyncHandler(async(req,res) =>{
         response
     })
 })
+// export const getDetailUser = asyncHandler(async(req,res) =>{
+
+//     const {id} = req.params
+//     const detailProduct = await User.findById(id)
+    
+//     return res.status(200).json({
+//         success : detailProduct ? "Gọi sản phẩm thành công" : false,
+//         message : detailProduct ? detailProduct : "Gọi sản phẩm thất bại"
+//     })
+// })
 
 export const refreshToken = asyncHandler(async(req,res) =>{
     // lấy cookie
