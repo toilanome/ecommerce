@@ -7,12 +7,13 @@ export interface User{
 }
 
 export interface IProduct{
-    response(response: any): unknown
     _id? : number | string,
     tilte: string,
     price:number,
     brand:string,
     slug:string,
     description : string,
-    images: string
+    images: string,
+    color?:string,
+    total : number
 }

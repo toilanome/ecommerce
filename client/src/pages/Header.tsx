@@ -7,35 +7,32 @@ import jwt, { VerifyErrors } from "jsonwebtoken"
 import {jwtDecode} from 'jwt-decode';
 import { ProductShopContext } from '../Context/ProductContext';
 import { useMutation } from 'react-query';
-import { getUserDetail } from '../api/User';
+import { getUserDetail, logout } from '../api/User';
 import { IProduct } from '../interface/User';
 import { VscSignOut } from "react-icons/vsc";
-
+import { toast } from 'react-toastify';
+import { RiFileList2Line } from "react-icons/ri";
 interface UserDetailsResponse {
     response: {
       name: string;
       // Other properties...
     };
   }
+  type User = {
+    name? : string
+  }
 const Header = () => {
-   
-    // const token = localStorage.getItem('AccessToken');
-    // console.log("otk", token);
-    const [data, setData] = useState({})
 
-    
-
-    
+    const [data, setData] = useState<User>({})
     useEffect(() => {
         const fetchUserDetails = async () => {
           try {
             const token = localStorage.getItem('AccessToken');
             if (token) {
               const res = await getUserDetail();
-              const userDetails: IProduct = res.data;
+              const userDetails: UserDetailsResponse = res.data;
               setData(userDetails.response);
-              console.log("User details:", userDetails.response);
-            }
+            } return null
           } catch (error) {
             console.error("Error fetching user details:", error);
           }
@@ -45,8 +42,23 @@ const Header = () => {
       }, []);
       
  
+  
+    const logoutUser = async () => {
+        try {
+       
+          // Xóa token từ localStorage
+          localStorage.removeItem('AccessToken');
+          toast.success("Logout thành công");
+          setTimeout(() =>{
+            window.location.reload();
 
-console.log("data", data);
+          }, 1000)
+        } catch (error) {
+          console.error("Logout error:", error);
+          // Xử lý lỗi nếu cần
+          toast.error("Đã xảy ra lỗi khi đăng xuất");
+        }
+     }
 
   
     
@@ -60,13 +72,29 @@ console.log("data", data);
                 <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
                 <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Toilanome</span>
             </a>
-            {data ? (
+            {data?.name ? (
                 <>
                 <div className='flex items-center lg:order-2'>
-                    <p className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Xin chào : {data.name}</p>
-                    <a href="#" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                    <p className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Xin chào : {data?.name}</p>
+                    <button onClick={logoutUser} className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
                     <VscSignOut />
-                </a>
+                    </button>
+
+                    <Link to={'/cart'}>
+                    <button  className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                    <IoCartOutline />
+
+                     </button>
+
+                    </Link>
+                    <Link to={'/bill'}>
+                    <button  className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                    <RiFileList2Line />
+
+                     </button>
+
+                    </Link>
+                   
                 </div>
                 </>
                 

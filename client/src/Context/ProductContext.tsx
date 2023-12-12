@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react'
 import {useMutation,useQueryClient,useQuery} from 'react-query'
 import { toast } from 'react-toastify'
-import { deleteProduct, getAllProduct } from '../api/Product'
+import { deleteProduct, getAllProduct, getDetailProduct } from '../api/Product'
 import { IProduct } from '../interface/User'
-import { deleteUser, getAllUser, getUserDetail } from '../api/User'
+import { deleteProductCart, deleteUser, getAllUser, getUserDetail } from '../api/User'
+import { getOrder } from '../api/Order'
 
 export const ProductShopContext = createContext({} as any)
 
@@ -26,6 +27,25 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
         }
     })
 
+    const {data :bill } = useQuery({
+        queryKey: ['BILL'],
+        queryFn: async() =>{
+            try {
+                const {data} = await getOrder()
+                console.log("data",data);
+                return data 
+                
+            } catch (error) {
+                console.error('Error fetching list Bill:', error);
+                throw error;
+            }
+        }
+    })
+     
+
+
+
+
     const {data :user} = useQuery({
         queryKey: ['USER'],
         queryFn: async() =>{
@@ -38,11 +58,13 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
                 console.error('Error fetching products:', error);
                 throw error;
             }
-        }
+        },
+        retry: 0
     })
     
 
     const mutationDeleteUser = useMutation({
+        
         mutationFn : (_id:any) => deleteUser(_id),
         onSuccess() {
             queryClient.invalidateQueries({
@@ -61,31 +83,35 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
         }
     })
 
-    // const mutationGetAccount = useMutation({
-    //     mutationFn : (_id:any) => getUserDetail(_id),
-    //     onSuccess() {
-    //         queryClient.invalidateQueries({
-    //             queryKey:['PRODUCTS']
-    //         })
-    //     }
-    // })
+    const mutationGetProduct = useMutation({
+        mutationFn : (_id:any) => getDetailProduct(_id),
+        onSuccess() {
+            queryClient.invalidateQueries({
+                queryKey:['PRODUCTS']
+            })
+        }
+    })
 
-    // const {data :userInfo} = useQuery({
-    //     queryKey: ['INFO'],
-    //     queryFn: async(_id : any) =>{
-    //         try {
-    //             const {data} = await getUserDetail(_id)
-    //             console.log("Info",data);
-    //             return data as IProduct[]
+
+    const {data :userDetail} = useQuery({
+        queryKey:['UserDetail'],
+        queryFn: async () =>{
+            const token = localStorage.getItem('AccessToken');
+            if(!token) throw new Error("token invalid")
+    
+            try {
+                const response = await getUserDetail()
+                console.log('user detail ', response.data);
                 
-    //         } catch (error) {
-    //             console.error('Error fetching products:', error);
-    //             throw error;
-    //         }
-    //     }
-    // })
+                return response.data
+            } catch (error) {
+                throw new Error("fetch user failde")
+            }
+        }
+    })
 
-    const ContextValue = {products, isError,isLoading, mutationDelete, user,mutationDeleteUser}
+
+    const ContextValue = {products, isError,isLoading, mutationDelete, user,mutationDeleteUser,mutationGetProduct,userDetail, bill}
   return (
     <ProductShopContext.Provider value={ContextValue}>
         {children}

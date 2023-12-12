@@ -2,7 +2,6 @@ import asyncHandler from 'express-async-handler';
 import Product from '../model/products.js'
 import slugify from 'slugify'
 import mongoose from 'mongoose';
-
 export const createProduct = asyncHandler(async(req,res) =>{
     if(Object.keys(req.body).length === 0) throw new Error("missing input")
     
@@ -58,3 +57,5 @@ export const updateProduct = asyncHandler(async(req,res) =>{
         message : update ? update : "update sản phẩm thất bại"
     })
 })
+
+  

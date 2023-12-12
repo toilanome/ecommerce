@@ -52,12 +52,12 @@ const Login = () => {
         <div className="">
           <form onSubmit={onSubmit}>
           <div>
-                 <input type="email" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8"  placeholder="Email Adress " onChange={onChange} name='email'/>
+                 <input type="email" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8"  placeholder="Email Adress " onChange={onChange} name='email' required/>
             </div>
             
              
             <div className="">
-                <input type="password" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 mb-8"  placeholder="Password " onChange={onChange} name='password'/>
+                <input type="password" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 mb-8"  placeholder="Password " onChange={onChange} name='password' required/>
             </div>
             
             <div className="flex justify-center my-6">

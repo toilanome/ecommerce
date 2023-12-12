@@ -16,6 +16,8 @@ import ProductPage from './pages/ProductPage'
 import SignUpUser from './Components/FormLogin/SignUpUser'
 import SignIpUser from './Components/FormLogin/SignInUser'
 import ProductDetail from './pages/ProductDetail'
+import Cart from './pages/Cart'
+import Bills from './pages/Bills'
 
 function App() {
 
@@ -27,7 +29,9 @@ function App() {
         <Route path='/' element={<PageLayout />}>
             <Route path='' element={<Home />} />
             <Route path='products' element={<ProductPage />} />
-            <Route path='products/detail' element={<ProductDetail />} />
+            <Route path='products/detail/:id' element={<ProductDetail />} />
+            <Route path='cart' element={<Cart />} />
+            <Route path='bill' element={<Bills />} />
            
 
         </Route>

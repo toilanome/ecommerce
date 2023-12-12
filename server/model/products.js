@@ -43,6 +43,10 @@ var userSchema = new mongoose.Schema({
         type:Array,
         
     },
+    total:{
+        type : Number,
+        default : 0
+    },
     color:{
         type:String,
         // enum là giá trị cho trước

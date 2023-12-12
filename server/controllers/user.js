@@ -1,10 +1,12 @@
 import asyncHandler from 'express-async-handler';
 import User from '../model/user.js'
+import Product from '../model/products.js'
 import bcrypt from 'bcrypt';
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
 import { AccessTokenUser, RefeshTokenUser } from '../middleware/jwt.js';
 import { sendMail } from '../ulitis/sendMail.js';
+import { log } from 'console';
 
 export const register =   asyncHandler(async(req,res) =>{
     const {email , password , name} = req.body;
@@ -90,7 +92,7 @@ export const getAllUser =   asyncHandler(async(req,res) =>{
 export const getUserDetail = asyncHandler(async(req,res) =>{
     const {_id} = req.user
     // select dùng để giấu các trường không mong muốn bị lộ 
-    const response = await User.findById(_id).select('-password -role -refreshToken')
+    const response = await User.findById(_id).select('-password  -refreshToken')
 
     return res.status(200).json({
         message: "Gọi users thành công",
@@ -123,22 +125,39 @@ export const refreshToken = asyncHandler(async(req,res) =>{
     })
 })
 
-export const logout = asyncHandler(async (req, res) =>{
-    const cookie = req.cookies;
-    if(!cookie || !cookie.refreshToken) throw new Error("refresh token invalid")
-    // xóa cookie
-    await User.findOneAndUpdate({refreshToken:cookie.refreshToken}, {refreshToken:''}, {new:true})
+// export const logout = asyncHandler(async (req, res) =>{
+//     const cookie = req.cookies;
+//     if(!cookie || !cookie.refreshToken) throw new Error("refresh token invalid")
+//     // xóa cookie
+//     await User.findOneAndUpdate({refreshToken:cookie.refreshToken}, {refreshToken:''}, {new:true})
+//     res.clearCookie('refreshToken', {
+//         httpOnly: true,
+//         secure : true
+//     })
+
+//     return res.status(200).json({
+//         success : true ,
+//         message : "logout thành công"
+//     })
+
+// })
+
+export const logout = asyncHandler(async (req, res) => {
+    const { refreshToken } = req.body;
+  
+    // Xử lý đăng xuất trên server, xóa refresh token từ cơ sở dữ liệu
+    await User.findOneAndUpdate({ refreshToken }, { refreshToken: '' }, { new: true });
+  
     res.clearCookie('refreshToken', {
-        httpOnly: true,
-        secure : true
-    })
-
+      httpOnly: true,
+      secure: true
+    });
+  
     return res.status(200).json({
-        success : true ,
-        message : "logout thành công"
-    })
-
-})
+      success: true,
+      message: "Đăng xuất thành công"
+    });
+  });
 
 export const forgotPassword = asyncHandler(async (req,res) =>{
 
@@ -222,6 +241,20 @@ export const updateUser =   asyncHandler(async(req,res) =>{
         response
     })
 })
+
+export const updateAddressUser =   asyncHandler(async(req,res) =>{
+    const {_id} = req.user
+    if(!_id  || !req.body.address) throw new Error("Missing inputs")
+    const response = await User.findByIdAndUpdate(_id, {$push : { address :  req.body.address}}, {new:true})
+    if(!response || response.length === 0) {
+        return res.json(" user không tồn tại")
+    }
+   
+    return res.status(200).json({
+        message: "Update address thành công",
+        response
+    })
+})
 export const updateUserById =   asyncHandler(async(req,res) =>{
     const {id} = req.params
     if(!id || Object.keys(req.body).length === 0) throw new Error("Missing inputs")
@@ -235,3 +268,40 @@ export const updateUserById =   asyncHandler(async(req,res) =>{
         response
     })
 })
+
+export const updateCartUser =   asyncHandler(async(req,res) =>{
+    const {_id} = req.user
+    const {pid,quantity,color} = req.body
+    if(!pid || !quantity || !color) throw new Error("Missing inputs")
+    const user =  await User.findById(_id).select('cart')
+
+    // const alreadyCart = await user.cart.find(item => item.product.toString() === pid)
+    
+       
+
+         const response = await  User.findByIdAndUpdate(_id, {$push : {cart: {product : pid, quantity, color}} }, {new:true} )
+        
+     
+
+        return res.status(200).json({
+            message: "Update cart thành công",
+            // total : totalPrice,
+            response
+        })
+   
+})
+
+export const deleteCartUser =   asyncHandler(async(req,res) =>{
+    const {_id} = req.user
+    const {pid} = req.body; 
+    if(!pid ) throw new Error('missing input')
+         const response = await  User.findByIdAndUpdate(_id, {$pull : {cart : {product : pid}}}, {new:true} )
+        if(!response ) throw new Error("undefind")
+        return res.status(200).json({
+            message: "Delete product thành công",
+            // total : totalPrice,
+            response
+        })
+   
+})
+

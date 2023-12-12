@@ -1,79 +1,78 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react'
-import { useMutation, useQuery } from 'react-query';
+import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
 import { getDetailProduct, updateProduct } from '../api/Product';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProductShopContext } from '../Context/ProductContext';
 import { IProduct } from '../interface/User';
+import { toast } from 'react-toastify';
 
 const UpdateProduct = () => {
-    const {id} = useParams()
-   console.log('check id', id);
-   
-    const [inputValue, setInputValue] =useState({})
-    // const {isLoading, isError, products} = useContext(ProductShopContext)
+  const { id } = useParams();
+  const [inputValue, setInputValue] = useState({});
+  const [product, setProduct] = useState({});
+  const [token, setToken] = useState(localStorage.getItem('AccessToken')); // Lấy token từ localStorage
 
-    const {data, isLoading, isError} = useQuery({
-        queryKey:['PRODUCT', id],
-        queryFn: async () =>{
-            try {
-                const respone = await axios.get(`http://localhost:8080/api/products/${id}`)
-                console.log("respone", respone);
-                
-                return respone.data
-            } catch (error) {
-                
-            }
-        }
-    })
-    console.log("data nè", data);
-    
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['PRODUCTS', id],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/products/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`, 
+          },
+        });
+        const productDetail = response.data.message;
+        console.log('response', productDetail);
+        setProduct(productDetail);
+        return productDetail;
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
+    },
+  });
 
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
+  const mutationProduct = useMutation({
+    mutationFn: async (updatedProduct) => {
+      try {
+        const response = await axios.put(`http://localhost:8080/api/products/${id}`, updatedProduct, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        console.log('response', response);
+      } catch (error) {
+        console.error('Error updating product:', error);
+      }
+    },
+    onSuccess() {
+      queryClient.invalidateQueries(['PRODUCTS']);
 
+      toast.success('Product updated successfully');
+     navigate('/admin/products')
+    },
+    onError: () => {
+      toast.error('Update failed, please check the information.');
+    },
+  });
 
-    if(isLoading) <div>Loading...</div>
-    // const currentProduct = products && products?.message.find((product:any) => product._id == id);
-    // console.log("data ", currentProduct);
-    
-    const mutationAccount = useMutation({
-        mutationFn: async (product:any) =>{
-            try {
-                const response = await updateProduct(product)
-                console.log("respone", response);
-                
-            } catch (error) {
-                
-            }
-        },
-        onSuccess(){
-            // console.log(res.data);
-            
-           alert("update thành công")
+  const onChange = (e : any) => {
 
-        },
-        onError(){
-            throw new Error("tạo thất bại, kiểm tra lại thông tin ")
-        }
-    })
+    const { name, value } = e.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
 
-    const onChange = (e:any) =>{
-        const {name, value} = e.target;
-        setInputValue({
-            ...inputValue,
-            [name]:value
-        })
-    }
-    
+  const onSubmit = (e:any) => {
+    e.preventDefault()
+    mutationProduct.mutate(inputValue as any );
+  };
 
-    const onSubmit = (product:IProduct) =>{
-        // e.preventDefault()
-        // mutationAccount.mutate({...products , product})
-        console.log("upđae");
-        
-    //    console.log(res);
-       
-    }
-
+  if (isLoading) return <div>Loading...</div>;
   return (
     <>
 
@@ -81,7 +80,7 @@ const UpdateProduct = () => {
     
   <div className="mx-auto w-full max-w-[550px]">
     <h2 className='text-center mb-3 block text-base font-medium text-[#07074D]'>Update Products</h2>
-    <form  >
+    <form onSubmit={onSubmit} >
       <div className="mb-5">
         <label
           htmlFor="title"
@@ -95,7 +94,7 @@ const UpdateProduct = () => {
           id="title"
           onChange={onChange}
           placeholder="Name Product"
-          defaultValue={data.message.title}
+          defaultValue={product.title}
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
       </div>
@@ -111,7 +110,7 @@ const UpdateProduct = () => {
           name="price"
           id="price"
           onChange={onChange}
-          defaultValue={data.message.price}
+          defaultValue={product.price}
 
           placeholder="0"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -129,8 +128,7 @@ const UpdateProduct = () => {
           name="slug"
           id="slug"
           onChange={onChange}
-          defaultValue={data.message.slug}
-
+          defaultValue={product.slug}
 
           placeholder="Slug"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -148,8 +146,7 @@ const UpdateProduct = () => {
           name="brand"
           id="brand"
           onChange={onChange}
-          defaultValue={data.message.brand}
-
+          defaultValue={product.brand}
 
           placeholder="Brand"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -167,8 +164,7 @@ const UpdateProduct = () => {
           name="images"
           id="images"
           onChange={onChange}
-          defaultValue={data.message.images}
-
+          defaultValue={product.images}
 
           placeholder="Images"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -186,8 +182,7 @@ const UpdateProduct = () => {
           name="description"
           id="description"
           onChange={onChange}
-              defaultValue={data.message.description}
-
+          defaultValue={product.description}
 
           placeholder="Type your description"
           className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"

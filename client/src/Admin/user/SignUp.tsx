@@ -45,17 +45,17 @@ const SignUp = () => {
         <form onSubmit={onSubmit}>
         <div className="">
             <div>
-                 <input type="text" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500"  placeholder="Name " onChange={onChange} name='name'/>
+                 <input type="text" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500"  placeholder="Name " onChange={onChange} name='name' required/>
             </div>
              <div>
-                 <input type="email" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8"  placeholder="Email Adress " onChange={onChange} name='email'/>
+                 <input type="email" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 my-8"  placeholder="Email Adress " onChange={onChange} name='email' required/>
             </div>
             
              <div>
-            <input type="phone" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 mb-8"  placeholder="Phone " onChange={onChange} name='mobile'/>
+            <input type="phone" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 mb-8"  placeholder="Phone " onChange={onChange} name='mobile' required/>
             </div>
             <div className="">
-                <input type="password" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 mb-8"  placeholder="Password "onChange={onChange} name='password' />
+                <input type="password" className="focus:outline-none border-b w-full pb-2 border-sky-400 placeholder-gray-500 mb-8"  placeholder="Password "onChange={onChange} name='password' required/>
             </div>
             <div className="flex">
                 <input type="checkbox" className="border-sky-400 " value="" />

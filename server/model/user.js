@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import crypto from 'crypto'
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
+    
     name:{
         type:String,
         required:true,
@@ -25,13 +26,13 @@ var userSchema = new mongoose.Schema({
         type:String,
         default : 'user'
     },
-    cart:{
-        type:Array,
-        default:[],
-    },
-    address:[
-        {type:mongoose.Types.ObjectId, ref : "Address"}
-    ],
+    cart:[{
+        product : {type : mongoose.Types.ObjectId, ref : 'Product'},
+        quantity:Number,
+        color: String,
+        total:Number
+    }],
+    address: { type:Array, default : []},
     wishlist: [
         {type:mongoose.Types.ObjectId, ref :'Product'}
     ],
@@ -60,7 +61,7 @@ userSchema.methods = {
         const resetToken = crypto.randomBytes(32).toString("hex");
         // Kiểm tra xem 'this' có phải là một đối tượng hợp lệ không
         if (this) {
-            
+
             this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
             this.passwordResetExpires = Date.now() + 15 * 60 * 1000;
         } else {
@@ -70,6 +71,8 @@ userSchema.methods = {
         return resetToken;
     }
 }
+
+
 
 
 

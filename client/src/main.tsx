@@ -11,7 +11,7 @@ import {
 } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 import ProductContext from './Context/ProductContext.tsx'
-
+import { ReactQueryDevtools } from 'react-query/devtools'
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <ProductContext>
       <App />
-
+      <ReactQueryDevtools initialIsOpen={false} />
       </ProductContext>
     </QueryClientProvider>
     </BrowserRouter>

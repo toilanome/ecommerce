@@ -7,7 +7,13 @@ const User = () => {
   const {user, isError, isLoading,mutationDeleteUser} = useContext(ProductShopContext)
   console.log('user : ', user);
   
+  const handleDeleteUser = (_id :any) => {
+    const isConfirmed = window.confirm('Bạn có muốn xóa người dùng này không?');
 
+    if (isConfirmed) {
+      mutationDeleteUser.mutate(_id);
+    }
+  };
 
   if(isLoading) {
     return <div>Loading...</div>
@@ -55,8 +61,8 @@ const User = () => {
         </thead>
 
         <tbody>
-          {user.response.map((item:any, index:number) =>(
-            <tr>
+          {user?.response?.map((item:any, index:number) =>(
+            <tr key={index}>
             <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
               {item.name}
             </th>
@@ -70,7 +76,7 @@ const User = () => {
             </td>
             <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-              <button className="bg-red-500 text-white active:bg-red-800 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onClick={() => mutationDeleteUser.mutate(item._id)}>Delete</button>
+              <button className="bg-red-500 text-white active:bg-red-800 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onClick={() =>handleDeleteUser(item._id)}>Delete</button>
               
 
             </td>

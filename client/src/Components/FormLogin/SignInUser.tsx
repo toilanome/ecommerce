@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../api/User'
 import {toast} from 'react-toastify'
 const SignIpUser = () => {
-
+    const queryClient = useQueryClient()
     const navigate = useNavigate()
     const [inputValue, setInputValue] =useState({})
     
@@ -17,7 +17,10 @@ const SignIpUser = () => {
             // Lưu token mới vào Local Storage
             localStorage.setItem('AccessToken', Accesstoken);
             toast.success("Đăng Nhập Thành Công =))))")
-            navigate('/')
+            queryClient.invalidateQueries({
+                queryKey:['USER']
+            })
+            window.location.href = '/'
             // Hiển thị thông báo đăng nhập thành công hoặc thực hiện các hành động khác
             
           },

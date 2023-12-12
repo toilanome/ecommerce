@@ -82,7 +82,7 @@ const SignUpUser = () => {
                     required />
 
             <label htmlFor="mobile" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Mobile</label>
-                <input id="mobile" type="text" name="mobile" placeholder="mobile" autoComplete="current-mobile"
+                <input id="mobile" type="number" name="mobile" placeholder="mobile" autoComplete="current-mobile"
                     className="block w-full py-3 px-1 mt-2 mb-4
                     text-gray-800 appearance-none 
                     border-b-2 border-gray-100

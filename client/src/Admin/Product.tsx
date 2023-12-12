@@ -6,7 +6,15 @@ const ListProduct = () => {
   const {products, isError, isLoading, mutationDelete} = useContext(ProductShopContext)
   console.log('product', products);
   
+  const handleDeleteProduct = (_id :any) => {
+    // Hiển thị confirm box
+    const isConfirmed = window.confirm('Bạn có muốn xóa sản phẩm này không?');
 
+    // Nếu người dùng xác nhận muốn xóa, thực hiện mutation
+    if (isConfirmed) {
+      mutationDelete.mutate(_id);
+    }
+  };
 
   if(isLoading) {
     return <div>Loading...</div>
@@ -66,33 +74,29 @@ const ListProduct = () => {
         <tbody>
           {products.message.map((item:any, index :number) =>(
             <tr key={index}>
-            <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+            <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4 text-left text-blueGray-700 ">
               {item.title}
             </th>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4 ">
             {item.price}
 
             </td>
-            <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs p-4 " style={{wordBreak:'break-word'}}>
               {item.images}
             </td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4">
               {item.slug}
             </td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4">
               {item.brand}
             </td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-              <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4 "  style={{wordBreak:'break-word'}}>
               
               {item.description}
               
             </td>
-            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-              <button className="bg-red-500 text-white active:bg-red-800 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onClick={() => mutationDelete.mutate(item._id)}>Delete</button>
+            <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs  p-4">
+              <button className="bg-red-500 text-white active:bg-red-800 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onClick={() => handleDeleteProduct(item._id)}>Delete</button>
              <Link to={`updateProduct/${item._id}`}>
              <button type='button' className='bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'>Update</button>
               </Link> 
