@@ -1,5 +1,5 @@
 import Swipers from "../Components/Swiper";
-
+import { CiStar } from "react-icons/ci";
 const Home = () => {
   return (
     <>
@@ -293,6 +293,73 @@ const Home = () => {
                 
                 </div>
                
+            </section>
+
+
+            <section className="  gap-5 mx-auto max-w-screen-xl bg-green-50  mt-20" >
+              <div style={{margin:'0 auto'}} className="pt-5">
+              <h2 className="block  pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-2 font-sans font-bold  " style={{fontSize:'30px'}}>
+              Testimonials <br /> 
+             </h2>
+             <h4 className="text-center mb-10 block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">Some quotes from our happy customers</h4> 
+              </div>
+
+              <div className="row grid grid-cols-3 text-center  gap-5 pl-32 pr-32 pb-32"> 
+                <div className="col bg-white p-7 shadow-lg ">
+                  <div className="flex justify-center mb-5">
+                    <img src="https://images.pexels.com/photos/19397637/pexels-photo-19397637/free-photo-of-dan-ba-sach-chan-dung-hang-d-t-kim.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="rounded-full h-14 w-14 "  />
+                    
+                  </div>
+                  <div className="flex justify-center mb-3">
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                  </div>
+                  <div>
+                    <h4>“I love it! No more air fresheners”</h4>
+                    <span className="text-xs text-gray-600">Lucifer</span>
+                  </div>
+                </div>
+
+                <div className="col bg-white p-7 shadow-lg">
+                  <div className="flex justify-center mb-5">
+                    <img src="https://images.pexels.com/photos/19397637/pexels-photo-19397637/free-photo-of-dan-ba-sach-chan-dung-hang-d-t-kim.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="rounded-full h-14 w-14 "  />
+                    
+                  </div>
+                  <div className="flex justify-center mb-3">
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                  </div>
+                  <div>
+                    <h4>“I love it! No more air fresheners”</h4>
+                    <span className="text-xs text-gray-600">Lucifer</span>
+                  </div>
+                </div>
+
+                <div className="col bg-white p-7 shadow-lg">
+                  <div className="flex justify-center mb-5">
+                    <img src="https://images.pexels.com/photos/19397637/pexels-photo-19397637/free-photo-of-dan-ba-sach-chan-dung-hang-d-t-kim.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" className="rounded-full h-14 w-14 "  />
+                    
+                  </div>
+                  <div className="flex justify-center mb-3">
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                    <img src="src\assets\Star.svg" alt="" />
+                  </div>
+                  <div>
+                    <h4>“I love it! No more air fresheners”</h4>
+                    <span className="text-xs text-gray-600">Lucifer</span>
+                  </div>
+                </div>
+                
+              </div>
+              
+           
+        
             </section>
 
       </div>
