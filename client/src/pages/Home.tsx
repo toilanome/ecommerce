@@ -6,10 +6,11 @@ const Home = () => {
       <div className="container ">
           <Swipers />
 
-        <h2 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-20">
-          BEST SELLING <br /> <br /> Get in on the trend with our curated
-          selection of best-selling styles.
+        <h2 className="block  pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-5 font-sans font-bold  " style={{fontSize:'30px'}}>
+          BEST SELLING <br /> 
         </h2>
+        <h4 className="text-center mb-10 block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">Get in on the trend with our curated
+          selection of best-selling styles.</h4> 
 
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
           <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
@@ -106,24 +107,23 @@ const Home = () => {
           </div>
         </section>
 
-        <h2 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-7">
+        <h2 className="block  pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-5 font-sans font-bold  " style={{fontSize:'30px'}}>
           OUR PRODUCTS <br />{" "}
         </h2>
 
-        <ul className="flex justify-center  py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 cursor-pointer lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-7">
-          <li className="mr-10 ml-10 hover:text-red-400 hover:bg-transparent">
-            Womens
-          </li>
-          <li className="mr-10 ml-10 hover:text-red-400 hover:bg-transparent">
-            Mens
-          </li>
-          <li className="mr-10 ml-10 hover:text-red-400 hover:bg-transparent">
-            Kids
-          </li>
-          <li className="mr-10 ml-10 hover:text-red-400 hover:bg-transparent">
-            Older
-          </li>
-        </ul>
+        <nav className="bg-white shadow dark:bg-gray-800">
+    <div className="container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
+        <a href="#" className="text-gray-800 dark:text-gray-200 border-b-2 border-blue-500 mx-1.5 sm:mx-6">mens</a>
+
+        <a href="#" className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">women</a>
+
+        <a href="#" className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">kids</a>
+
+        <a href="#" className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">older</a>
+
+        
+    </div>
+</nav>
 
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
           <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
