@@ -8,7 +8,7 @@ export interface User{
 
 export interface IProduct{
     _id? : number | string,
-    tilte: string,
+    title: string,
     price:number,
     brand:string,
     slug:string,

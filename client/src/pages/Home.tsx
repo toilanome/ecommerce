@@ -1,6 +1,12 @@
-import Swipers from "../Components/Swiper";
-import { CiStar } from "react-icons/ci";
+import {useContext} from 'react'
+ import Swipers from "../Components/Swiper";
+import { ProductShopContext } from '../Context/ProductContext';
+import { IProduct } from '../interface/User';
 const Home = () => {
+
+  const {products} = useContext(ProductShopContext)
+  console.log('product', products);
+  
   return (
     <>
       <div className="container ">
@@ -13,25 +19,25 @@ const Home = () => {
           selection of best-selling styles.</h4> 
 
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+          {products?.message?.slice(0,3).map((item:IProduct, index:number) =>(
+            <div key={index} className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
               <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
+                src={item?.images}
                 className="h-full w-full object-cover"
               />
             </div>
             <div className="p-6">
               <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
+                <p className="block font-sans text-sm font-medium leading-relaxed text-blue-gray-900 antialiased">
+                  {item?.title}
                 </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
+                <p className="block font-sans text-sm font-medium leading-relaxed text-blue-gray-900 antialiased">
+                 {(item?.price).toLocaleString('vi-VN')} VNĐ
                 </p>
               </div>
               <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
+               {item?.description}
               </p>
             </div>
             <div className="p-6 pt-0">
@@ -43,68 +49,10 @@ const Home = () => {
               </button>
             </div>
           </div>
+          ))}
+          
 
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
-                </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
-                </p>
-              </div>
-              <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
-              </p>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
-                </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
-                </p>
-              </div>
-              <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
-              </p>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
+         
         </section>
 
         <h2 className="block  pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-5 font-sans font-bold  " style={{fontSize:'30px'}}>
@@ -126,129 +74,45 @@ const Home = () => {
 </nav>
 
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
-                </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
-                </p>
-              </div>
-              <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
-              </p>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
+        {products?.message?.slice(0,4).map((item:IProduct,index:number) =>(
 
           <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
-                </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
-                </p>
-              </div>
-              <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
-              </p>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
-            </div>
+              <>
+                <div key={index} className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
+               <img
+                 src={item?.images}
+                 className="h-full w-full object-cover"
+               />
+             </div>
+             <div className="p-6">
+               <div className="mb-2 flex items-center justify-between">
+                 <p className="block font-sans text-sm font-medium leading-relaxed text-blue-gray-900 antialiased">
+                   {item?.title}
+                 </p>
+                 <p className="block font-sans text-sm font-medium leading-relaxed text-blue-gray-900 antialiased">
+                   {(item?.price).toLocaleString('vi-VN')} VNĐ
+                 </p>
+               </div>
+               <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
+                 {item?.description}
+               </p>
+             </div>
+             <div className="p-6 pt-0">
+               <button
+                 className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
+                 type="button"
+               >
+                 Add to Cart
+               </button>
+             </div>
+              </>
+             
+           
           </div>
+            ))}
 
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
-                </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
-                </p>
-              </div>
-              <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
-              </p>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
 
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-              <img
-                src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  Apple AirPods
-                </p>
-                <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased">
-                  $95.00
-                </p>
-              </div>
-              <p className="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased opacity-75">
-                With plenty of talk and listen time, voice-activated Siri
-                access, and an available wireless charging case.
-              </p>
-            </div>
-            <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
+         
 
          
           
@@ -283,7 +147,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div>
-                            <button className=' select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase  transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-green-700 text-white w-2/6 h-16'>Buy Now</button>
+                            <button className=' select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase  transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-green-500 text-white w-2/6 h-16'>Buy Now</button>
                         </div>
 
                         
