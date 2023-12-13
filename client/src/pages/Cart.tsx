@@ -1,6 +1,5 @@
-import axios from "axios";
-import React, { useContext, useState } from "react";
-import { useQuery, useMutation, QueryClient, useQueryClient } from "react-query";
+import { useContext, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { ProductShopContext } from "../Context/ProductContext";
 import { createOrder } from "../api/Order";
 import Modal from "../Components/Modal";

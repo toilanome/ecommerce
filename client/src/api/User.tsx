@@ -1,4 +1,3 @@
-import React from 'react'
 import {Instance, InstanceToken} from './Instance'
 import { User } from '../interface/User'
 

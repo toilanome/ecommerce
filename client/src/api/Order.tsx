@@ -1,6 +1,4 @@
-import React from 'react'
-import {Instance, InstanceToken} from './Instance'
-import { User } from '../interface/User'
+import { InstanceToken} from './Instance'
 
 export const createOrder = () =>{
    return  InstanceToken.post('/order')

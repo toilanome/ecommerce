@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ProductShopContext } from "../Context/ProductContext";
 import { useParams } from "react-router-dom";
 import { IProduct } from "../interface/User";
-import { QueryClient, useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import { useMutation, useQueryClient } from "react-query";
 import {toast} from 'react-toastify'
 import { updateCart } from "../api/User";
 

@@ -10,7 +10,6 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import ListProduct from './Admin/Product'
 import UpdateProduct from './Admin/UpdateProduct'
-import Header from './pages/Header'
 import PageLayout from './Layout/PageLayout'
 import ProductPage from './pages/ProductPage'
 import SignUpUser from './Components/FormLogin/SignUpUser'

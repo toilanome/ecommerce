@@ -1,6 +1,4 @@
-import React from 'react'
-import { FaArrowRight } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
+
 const Brum = () => {
   return (
     <>

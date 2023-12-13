@@ -1,10 +1,7 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react'
-import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
-import { getDetailProduct, updateProduct } from '../api/Product';
+import { useState } from 'react'
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ProductShopContext } from '../Context/ProductContext';
-import { IProduct } from '../interface/User';
 import { toast } from 'react-toastify';
 
 const UpdateProduct = () => {

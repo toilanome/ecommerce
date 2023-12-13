@@ -1,14 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
-import logo from '../Components/Assets/logo.png'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoCartOutline } from "react-icons/io5";
 import { RiAccountPinCircleFill } from "react-icons/ri";
-import jwt, { VerifyErrors } from "jsonwebtoken"
-import {jwtDecode} from 'jwt-decode';
-import { ProductShopContext } from '../Context/ProductContext';
-import { useMutation } from 'react-query';
-import { getUserDetail, logout } from '../api/User';
-import { IProduct } from '../interface/User';
+import { getUserDetail } from '../api/User';
 import { VscSignOut } from "react-icons/vsc";
 import { toast } from 'react-toastify';
 import { RiFileList2Line } from "react-icons/ri";

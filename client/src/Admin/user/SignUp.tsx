@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { register } from '../../api/User'
 import { User } from '../../interface/User'

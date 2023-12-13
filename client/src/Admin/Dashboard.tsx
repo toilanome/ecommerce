@@ -1,6 +1,4 @@
-import React from 'react'
 import {Outlet, Link} from 'react-router-dom'
-import Product from './Product'
 const Dashboard = () => {
   return (
     <>
