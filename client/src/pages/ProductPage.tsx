@@ -4,7 +4,7 @@ import { ProductShopContext } from "../Context/ProductContext";
 import { Link } from "react-router-dom";
 
 const ProductPage = () => {
-  const { products, isError, isLoading, mutationDelete } =
+  const { products, isError, isLoading } =
     useContext(ProductShopContext);
   console.log("product", products);
 

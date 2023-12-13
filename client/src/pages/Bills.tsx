@@ -25,7 +25,7 @@ const Bills = () => {
     <div className="max-w-4xl  bg-white w-full rounded-lg shadow-xl mb-10">
         {listBill?.map((item:any,index:number) =>(
             <>
-            <div className='mb-10'>
+            <div key={index} className='mb-10'>
             <div className="p-4 border-b">
             <h2 className="text-2xl ">
                 Hóa đơn mua sắm

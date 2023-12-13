@@ -3,14 +3,22 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+interface Product  {
+  title: string;
+  price: number;
+  slug: string;
+  brand: string;
+  images: string;
+  description: string;
+  // Add other properties as needed
+}
 const UpdateProduct = () => {
   const { id } = useParams();
   const [inputValue, setInputValue] = useState({});
-  const [product, setProduct] = useState({});
-  const [token, setToken] = useState(localStorage.getItem('AccessToken')); // Lấy token từ localStorage
+  const [product, setProduct] = useState<Product | null>(null);
+  const token =localStorage.getItem('AccessToken'); // Lấy token từ localStorage
 
-  const { data, isLoading, isError } = useQuery({
+  const { isLoading} = useQuery<Product>({
     queryKey: ['PRODUCTS', id],
     queryFn: async () => {
       try {
@@ -91,7 +99,7 @@ const UpdateProduct = () => {
           id="title"
           onChange={onChange}
           placeholder="Name Product"
-          defaultValue={product.title}
+          defaultValue={product?.title}
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
         />
       </div>
@@ -107,7 +115,7 @@ const UpdateProduct = () => {
           name="price"
           id="price"
           onChange={onChange}
-          defaultValue={product.price}
+          defaultValue={product?.price}
 
           placeholder="0"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -125,7 +133,7 @@ const UpdateProduct = () => {
           name="slug"
           id="slug"
           onChange={onChange}
-          defaultValue={product.slug}
+          defaultValue={product?.slug}
 
           placeholder="Slug"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -143,7 +151,7 @@ const UpdateProduct = () => {
           name="brand"
           id="brand"
           onChange={onChange}
-          defaultValue={product.brand}
+          defaultValue={product?.brand}
 
           placeholder="Brand"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -161,7 +169,7 @@ const UpdateProduct = () => {
           name="images"
           id="images"
           onChange={onChange}
-          defaultValue={product.images}
+          defaultValue={product?.images}
 
           placeholder="Images"
           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
@@ -179,7 +187,7 @@ const UpdateProduct = () => {
           name="description"
           id="description"
           onChange={onChange}
-          defaultValue={product.description}
+          defaultValue={product?.description}
 
           placeholder="Type your description"
           className="w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"

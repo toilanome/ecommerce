@@ -10,7 +10,7 @@ const Login = () => {
     const mutationAccount = useMutation({
         mutationFn: (user:any) => login(user),
         onSuccess(response) {
-            const { Accesstoken, userData } = response.data;
+            const { Accesstoken } = response.data;
         
             // Lưu token mới vào Local Storage
             localStorage.setItem('AccessToken', Accesstoken);

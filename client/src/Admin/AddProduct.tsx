@@ -31,7 +31,7 @@ const AddProduct = () => {
     const onSubmit = (e:any) =>{
         e.preventDefault()
      const res = mutationAccount.mutate(inputValue)
-    //    console.log(res);
+       console.log(res);
        
     }
 

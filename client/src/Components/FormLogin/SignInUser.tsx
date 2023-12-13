@@ -5,14 +5,13 @@ import { login } from '../../api/User'
 import {toast} from 'react-toastify'
 const SignIpUser = () => {
     const queryClient = useQueryClient()
-    const navigate = useNavigate()
     const [inputValue, setInputValue] =useState({})
     
 
     const mutationAccount = useMutation({
         mutationFn: (user:any) => login(user),
         onSuccess(response) {
-            const { Accesstoken, userData } = response.data;
+            const { Accesstoken } = response.data;
             
             // Lưu token mới vào Local Storage
             localStorage.setItem('AccessToken', Accesstoken);
