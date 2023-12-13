@@ -17,7 +17,7 @@ const UpdateProduct = () => {
     queryKey: ['PRODUCTS', id],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/products/${id}`, {
+        const response = await axios.get(`https://ecomerce-server-uztg.onrender.com/api/products/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`, 
           },
@@ -37,7 +37,7 @@ const UpdateProduct = () => {
   const mutationProduct = useMutation({
     mutationFn: async (updatedProduct) => {
       try {
-        const response = await axios.put(`http://localhost:8080/api/products/${id}`, updatedProduct, {
+        const response = await axios.put(`https://ecomerce-server-uztg.onrender.com/api/products/${id}`, updatedProduct, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
