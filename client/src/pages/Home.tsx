@@ -1,16 +1,12 @@
+import Swipers from "../Components/Swiper";
 
 const Home = () => {
   return (
     <>
       <div className="container ">
-        <div className=" items-center mx-auto max-w-screen-xl">
-          <img
-            src="https://img3.thuthuatphanmem.vn/uploads/2019/10/14/banner-thoi-trang-hien-dai-dep-nhat_113857069.jpg"
-            alt=""
-          />
-        </div>
+          <Swipers />
 
-        <h2 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-20">
+        <h2 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 mt-10 text-center mb-20">
           BEST SELLING <br /> <br /> Get in on the trend with our curated
           selection of best-selling styles.
         </h2>
@@ -262,32 +258,32 @@ const Home = () => {
 
 
         <section className='container bg-color mt-20'>
-                <div  className='excluise flex justify-center gap-32'>
+                <div  className='excluise  justify-center gap-32 grid grid-cols-2'>
                 <div className="">
-                    <img src="https://i.pinimg.com/originals/63/0f/13/630f134c09a9beefaeb1e1def7fe96f0.jpg" alt="" />
+                    <img src="https://images.pexels.com/photos/4065842/pexels-photo-4065842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
                 </div>
-                    <div className="excluise-info">
+                    <div className="excluise-info mt-10 ">
                         <div className="excluise-title ">
-                        <h3 className=' text-5xl font-bold color mb-8 '>Exclusive offer</h3>
-                         <p className='mb-8'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique.</p>
+                        <h3 className=' text-5xl font-bold color mb-8  ' style={{fontSize:'70px'}}>Exclusive Offer</h3>
+                         <p className='mb-8'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique.</p>
                         </div>
 
                         <div className="excluise-day mb-9 flex">
-                            <div className="box">
+                            <div className="flex justify-center items-center  w-1/6 h-16 border border-y-green-300 bg-green-500  text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 mr-4"> 
                                 <span>06</span>
                                 <span>Days</span>
                             </div>
-                            <div className="box">
+                            <div className="flex justify-center items-center w-1/6 h-16 border border-y-green-300 bg-green-500  text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 mr-4">
                                 <span>06</span>
                                 <span>Days</span>
                             </div>
-                            <div className="box">
+                            <div className="flex justify-center items-center  w-1/6 h-16 border border-y-green-300 bg-green-500  text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 mr-4">
                                 <span>06</span>
                                 <span>Days</span>
                             </div>
                         </div>
                         <div>
-                            <button className='des-banner-btn'>Buy Now</button>
+                            <button className=' select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase  transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-green-700 text-white w-2/6 h-16'>Buy Now</button>
                         </div>
 
                         

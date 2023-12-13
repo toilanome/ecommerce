@@ -6,8 +6,11 @@ import Modal from "../Components/Modal";
 import { deleteProductCart } from "../api/User";
 // import ShopContext, { ShopcontextMain } from '../Context/ShopContext'
 import { FaRegTrashAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate()
   const [order, setOrder] = useState();
   const [open, setOpen] = useState<boolean>(false);
 const queryClient = useQueryClient()
@@ -45,6 +48,10 @@ const queryClient = useQueryClient()
     try {
       const response = await createOrder();
       setOrder(response.data);
+      toast.success("Thanh toán thành công")
+      setTimeout(() => {
+        navigate('/bill')
+      }, 3000);
       console.log("order : ", response.data);
     } catch (error) {
       console.log(error);

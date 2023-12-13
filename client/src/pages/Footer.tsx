@@ -12,7 +12,7 @@ const Footer = () => {
         className="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
         <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
             <a className="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
-            <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+            <img src="src\assets\logo.PNG" className="mr-3 h-6 sm:h-9 rounded-lg" alt="Flowbite Logo"  />
             Toilanome
             </a>
             <p className="mt-2 text-sm text-gray-500">Design, Code and Ship!</p>
