@@ -4,7 +4,6 @@ import { deleteProduct, getAllCategory, getAllProduct, getDetailCategory, getDet
 import { IProduct } from '../interface/User'
 import { deleteUser, getAllUser, getUserDetail } from '../api/User'
 import { getOrder } from '../api/Order'
-import axios from 'axios'
 
 export const ProductShopContext = createContext({} as any)
 
