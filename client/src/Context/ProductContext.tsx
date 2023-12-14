@@ -4,6 +4,7 @@ import { deleteProduct, getAllCategory, getAllProduct, getDetailCategory, getDet
 import { IProduct } from '../interface/User'
 import { deleteUser, getAllUser, getUserDetail } from '../api/User'
 import { getOrder } from '../api/Order'
+import axios from 'axios'
 
 export const ProductShopContext = createContext({} as any)
 
@@ -103,7 +104,7 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
         queryKey:["Category"],
         queryFn:async() =>{
             try {
-                const {data} = await getAllCategory()
+                const {data} = await axios.get(`http://localhost:8080/api/category/allCategory`)
                 console.log('all category', data);
                 return data
                 

@@ -84,20 +84,29 @@ const Home = () => {
 
         <nav className="bg-white shadow dark:bg-gray-800">
     <div className="container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
-        <a href="#" className="text-gray-800 dark:text-gray-200 border-b-2 border-blue-500 mx-1.5 sm:mx-6">mens</a>
 
-        <a href="#" className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">women</a>
+    {categories?.data?.map((category:any) => (
+            <a
+              key={category._id}
+              onClick={() => handleCategoryClick(category._id)}
+              className={`${
+                selectCategoryId === category._id
+                  ? 'text-gray-800 dark:text-gray-200 border-b-2 border-blue-500'
+                  : 'border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 cursor-pointer'
+              } mx-1.5 sm:mx-6`}
+            >
+              {category.name} 
+            </a>
+          ))}
 
-        <a href="#" className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">kids</a>
 
-        <a href="#" className="border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 mx-1.5 sm:mx-6">older</a>
 
         
     </div>
 </nav>
 
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
-        {products?.message?.slice(0,4).map((item:IProduct,index:number) =>(
+        {filterProduct?.slice(0,4).map((item:IProduct,index:number) =>(
 
           <div key={index} className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
               <>
