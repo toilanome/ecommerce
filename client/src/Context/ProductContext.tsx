@@ -104,7 +104,7 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
         queryKey:["Category"],
         queryFn:async() =>{
             try {
-                const {data} = await axios.get(`http://localhost:8080/api/category/allCategory`)
+                const {data} = await getAllCategory()
                 console.log('all category', data);
                 return data
                 
