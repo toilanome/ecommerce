@@ -26,11 +26,14 @@ var userSchema = new mongoose.Schema({
         type:Number,
         required:true,
     },
-    category:{
-        type:mongoose.Types.ObjectId,
-        // ref dùng để liên kết bảng
-        ref: "Category"
-    },
+    categoryId:
+        {
+            type:mongoose.Types.ObjectId,
+            // ref dùng để liên kết bảng
+            ref: "Category",
+        }
+       
+    ,
     quantity:{
         type:Number,
         default: 0

@@ -30,6 +30,19 @@ export const register =   asyncHandler(async(req,res) =>{
     })
 })
 
+export const checkEmail =   asyncHandler(async(req,res) =>{
+    const { email } = req.query;
+
+    try {
+      const user = await User.findOne({ email });
+  
+      return res.status(200).json({ exists: !!user });
+    } catch (error) {
+      console.error('Error checking email existence:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
 export const login =   asyncHandler(async(req,res) =>{
     const {email , password } = req.body;
     if(!email || !password ) 

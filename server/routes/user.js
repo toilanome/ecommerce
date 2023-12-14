@@ -1,4 +1,4 @@
-import { deleteCartUser, deleteUser, forgotPassword, getAllUser, getUserDetail, login, logout, refreshToken, register, resetPassword, updateAddressUser, updateCartUser, updateUser, updateUserById } from '../controllers/user.js';
+import { checkEmail, deleteCartUser, deleteUser, forgotPassword, getAllUser, getUserDetail, login, logout, refreshToken, register, resetPassword, updateAddressUser, updateCartUser, updateUser, updateUserById } from '../controllers/user.js';
 import { Router } from 'express';
 import { isAdmin, verifyAccessToken } from '../middleware/verifyToken.js';
 const routerUser = Router();
@@ -14,6 +14,7 @@ routerUser.put('/deleteCart',verifyAccessToken, deleteCartUser)
 
 routerUser.put('/:id',verifyAccessToken,isAdmin, updateUserById)
 routerUser.get('/refreshToken', refreshToken)
+routerUser.get('/checkEmail', checkEmail)
 routerUser.get('/forgotPassword', forgotPassword)
 routerUser.put('/resetPassword', resetPassword)
 routerUser.get('/logout', logout)

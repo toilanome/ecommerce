@@ -19,7 +19,7 @@ const ProductPage = () => {
     <>
       <section className="container ">
         <Brum />
-        <h2 className="text-center mt-10">All Products</h2>
+        <h2 className="text-center mt-10 block  pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700  mb-2 font-sans font-bold text-2xl">All Products</h2>
         <div className="grid grid-cols-3">
         {products?.message?.map((item: any, index: number) => (
 

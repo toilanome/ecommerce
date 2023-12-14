@@ -13,7 +13,11 @@ const Cart = () => {
   const navigate = useNavigate()
   const [order, setOrder] = useState();
   const [open, setOpen] = useState<boolean>(false);
+
+
 const queryClient = useQueryClient()
+
+
   const { userDetail, isError, isLoading, products } =
     useContext(ProductShopContext);
   const cartUser = userDetail?.response;

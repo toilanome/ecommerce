@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 const Brum = () => {
   return (
@@ -9,11 +10,11 @@ const Brum = () => {
         
       </li>
       <li className="flex items-center">
-        <a href="#" className="text-gray-600 hover:text-blue-500 transition-colors duration-300">Tools</a>
+        <Link to={'/'} className="text-gray-600 hover:text-blue-500 transition-colors duration-300">Home</Link>
         <span className="mx-2">/</span>
       </li>
       <li className="flex items-center">
-        <span className="text-gray-800">Qr Code Generator</span>
+        <span className="text-gray-800">Products</span>
       </li>
     </ol>
   </nav>

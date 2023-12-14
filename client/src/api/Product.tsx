@@ -17,3 +17,10 @@ export const updateProduct = (product : IProduct) =>{
     console.log('Updating product with ID:', product._id);
     return InstanceToken.put('/products/' + product._id)
 }
+
+export const getDetailCategory = (_id : IProduct) =>{
+    return Instance.get('/category/detail/' + _id)
+}
+export const getAllCategory = () =>{
+    return Instance.get('/category/allCategory')
+}

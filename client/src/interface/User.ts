@@ -15,5 +15,6 @@ export interface IProduct{
     description : string,
     images: string,
     color?:string,
+    category: any,
     total : number
 }

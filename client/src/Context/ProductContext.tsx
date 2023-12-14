@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 import {useMutation,useQueryClient,useQuery} from 'react-query'
-import { deleteProduct, getAllProduct, getDetailProduct } from '../api/Product'
+import { deleteProduct, getAllCategory, getAllProduct, getDetailCategory, getDetailProduct } from '../api/Product'
 import { IProduct } from '../interface/User'
 import { deleteUser, getAllUser, getUserDetail } from '../api/User'
 import { getOrder } from '../api/Order'
@@ -91,7 +91,28 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
         }
     })
 
+    const mutationGetCategory = useMutation({
+        mutationFn : (_id:any) => getDetailCategory(_id),
+        onSuccess() {
+            console.log("Gọi category thành công");
+            
+        }
+    })
 
+    const {data : categories} = useQuery({
+        queryKey:["Category"],
+        queryFn:async() =>{
+            try {
+                const {data} = await getAllCategory()
+                console.log('all category', data);
+                return data
+                
+            } catch (error) {
+                console.log(error);
+                
+            }
+        }
+    })
     const {data :userDetail} = useQuery({
         queryKey:['UserDetail'],
         queryFn: async () =>{
@@ -110,7 +131,7 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
     })
 
 
-    const ContextValue = {products, isError,isLoading, mutationDelete, user,mutationDeleteUser,mutationGetProduct,userDetail, bill}
+    const ContextValue = {products, isError,isLoading, mutationDelete, user,mutationDeleteUser,mutationGetProduct,userDetail, bill,mutationGetCategory,categories}
   return (
     <ProductShopContext.Provider value={ContextValue}>
         {children}

@@ -1,12 +1,28 @@
-import {useContext} from 'react'
+import {useContext, useState} from 'react'
  import Swipers from "../Components/Swiper";
 import { ProductShopContext } from '../Context/ProductContext';
 import { IProduct } from '../interface/User';
+import { Link } from 'react-router-dom';
 const Home = () => {
 
-  const {products} = useContext(ProductShopContext)
-  console.log('product', products);
+  const {products,mutationGetCategory,categories} = useContext(ProductShopContext)
+  const [selectCategoryId, setSelectCategoryId] = useState(null)
+
+  console.log("category ", categories);
   
+  const handleCategoryClick = async(_id:any) =>{
+      setSelectCategoryId(_id)
+      mutationGetCategory.mutateAsync(_id)
+  }
+
+  const filterProduct = selectCategoryId ? products?.message?.filter((product:IProduct) => product.category === selectCategoryId) : products?.message
+  
+  
+  
+  
+  
+
+
   return (
     <>
       <div className="container ">
@@ -21,12 +37,15 @@ const Home = () => {
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
           {products?.message?.slice(0,3).map((item:IProduct, index:number) =>(
             <div key={index} className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
+              <Link to={`/products/detail/${item._id}`}>
+              <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
               <img
                 src={item?.images}
                 className="h-full w-full object-cover"
               />
             </div>
+              </Link>
+           
             <div className="p-6">
               <div className="mb-2 flex items-center justify-between">
                 <p className="block font-sans text-sm font-medium leading-relaxed text-blue-gray-900 antialiased">
@@ -40,14 +59,18 @@ const Home = () => {
                {item?.description}
               </p>
             </div>
+            <Link to={`/products/detail/${item._id}`}>
             <div className="p-6 pt-0">
-              <button
-                className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
-                type="button"
-              >
-                Add to Cart
-              </button>
+
+            <button
+              className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
+              type="button"
+            >
+              Add to Cart
+            </button>
             </div>
+            </Link>
+            
           </div>
           ))}
           
@@ -76,14 +99,17 @@ const Home = () => {
         <section className=" flex justify-between gap-5 mx-auto max-w-screen-xl">
         {products?.message?.slice(0,4).map((item:IProduct,index:number) =>(
 
-          <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+          <div key={index} className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
               <>
-                <div key={index} className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
+            <Link to={`/products/detail/${item._id}`}>
+            <div key={index} className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
                <img
                  src={item?.images}
                  className="h-full w-full object-cover"
                />
              </div>
+            </Link>
+                
              <div className="p-6">
                <div className="mb-2 flex items-center justify-between">
                  <p className="block font-sans text-sm font-medium leading-relaxed text-blue-gray-900 antialiased">
@@ -98,12 +124,15 @@ const Home = () => {
                </p>
              </div>
              <div className="p-6 pt-0">
-               <button
+            <Link to={`/products/detail/${item._id}`}>
+            <button
                  className="block w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none bg-gray-200 text-black-600"
                  type="button"
                >
                  Add to Cart
                </button>
+          </Link>
+               
              </div>
               </>
              
@@ -128,7 +157,7 @@ const Home = () => {
                 </div>
                     <div className="excluise-info mt-10 ">
                         <div className="excluise-title ">
-                        <h3 className=' text-5xl font-bold color mb-8  ' style={{fontSize:'70px'}}>Exclusive Offer</h3>
+                        <h3 className=' text-5xl font-bold color mb-8  text-gray-900' style={{fontSize:'70px'}}>Exclusive Offer</h3>
                          <p className='mb-8'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique. Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br /> Magnam voluptatem doloremque officia pariatur ipsum atque  <br /> distinctio, quidem animi, veritatis soluta  rem beatae vitae expedita <br /> libero quasi vel odio. Beatae, similique.</p>
                         </div>
 

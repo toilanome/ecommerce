@@ -37,3 +37,5 @@ export const getUserDetail = async () => {
  export const deleteProductCart = async (payload:any) => {
    return InstanceToken.put('/user/deleteCart', payload)
  };
+
+ 
