@@ -23,7 +23,8 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
                 console.error('Error fetching products:', error);
                 throw error;
             }
-        }
+        },
+        retry:0
     })
 
     const {data :bill } = useQuery({
@@ -38,7 +39,9 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
                 console.error('Error fetching list Bill:', error);
                 throw error;
             }
-        }
+        },
+        retry:0
+
     })
      
 
@@ -111,7 +114,9 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
                 console.log(error);
                 
             }
-        }
+        },
+        retry:0
+
     })
     const {data :userDetail} = useQuery({
         queryKey:['UserDetail'],
@@ -128,6 +133,7 @@ const ProductContext = ({children} : {children : React.ReactNode}) => {
                 throw new Error("fetch user failde")
             }
         }
+
     })
 
 

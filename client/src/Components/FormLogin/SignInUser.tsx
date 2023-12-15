@@ -1,11 +1,19 @@
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Link } from 'react-router-dom'
 import { login } from '../../api/User'
 import {toast} from 'react-toastify'
+import { User } from '../../interface/User'
+interface FormErrors {
+    email?: string;
+    password?: string;
+   
+  }
 const SignIpUser = () => {
+    
     const queryClient = useQueryClient()
     const [inputValue, setInputValue] =useState({})
+    const [formErrors, setFormErrors] = useState<FormErrors>({}) 
     
 
     const mutationAccount = useMutation({
@@ -31,19 +39,50 @@ const SignIpUser = () => {
         }
     })
 
-    const onChange = (e:any) =>{
-        const {name, value} = e.target;
-        setInputValue({
-            ...inputValue,
-            [name]:value
-        })
-    }
+    const onChange = (e: any) => {
+        const { name, value } = e.target;
+        setInputValue((prevInputValue) => ({
+          ...prevInputValue,
+          [name]: value,
+        }));
+      };
+      
+      useEffect(() => {
+        const errors = validate(inputValue);
+        setFormErrors(errors);
+      }, [inputValue]);
     
-
+      const validate = (values: any) => {
+        let errors: any = {};
+ 
+      
+        if (!values.email) {
+          errors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+          errors.email = 'Email is invalid';
+        }
+      
+        if (!values.password) {
+          errors.password = 'Password is required';
+        } else if (values.password.length < 6) {
+          errors.password = 'Password must be at least 6 characters';
+        }
+      
+      
+        return errors;
+      };
     const onSubmit = async(e:any) =>{
-        e.preventDefault()
-        const response = await mutationAccount.mutateAsync(inputValue);
-        console.log('response ', response);
+        e.preventDefault();
+        const errors = validate(inputValue);
+        console.log('onSubmit - inputValue:', inputValue);
+        console.log('onSubmit - errors:', errors);
+        
+        if (Object.keys(errors).length === 0) {
+          mutationAccount.mutate(inputValue as User);
+        } else {
+          console.log('Setting form errors:', errors);
+          setFormErrors(errors);
+        }
         
     }
 
@@ -71,8 +110,10 @@ const SignIpUser = () => {
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     onChange={onChange}
-                    required />
-
+                     />
+{formErrors.email && (
+  <span className="text-red-500 text-sm">{formErrors.email}</span>
+)}
                 <label htmlFor="password" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
                 <input id="password" type="password" name="password" placeholder="password" autoComplete="current-password"
                     className="block w-full py-3 px-1 mt-2 mb-4
@@ -81,8 +122,10 @@ const SignIpUser = () => {
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     onChange={onChange}
 
-                    required />
-
+                     />
+{formErrors.password && (
+  <span className="text-red-500 text-sm">{formErrors.password}</span>
+)}
                 <button type="submit"
                     className="w-full py-3 mt-10 bg-gray-800 rounded-sm
                     font-medium text-white uppercase

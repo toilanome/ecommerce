@@ -1,13 +1,19 @@
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import { register } from '../../api/User'
 import { User } from '../../interface/User'
 import {toast} from 'react-toastify'
+interface FormErrors {
+    name?: string;
+    email?: string;
+    password?: string;
+    mobile?: string;
+  }
 const SignUpUser = () => {
     const navigate = useNavigate()
     const [inputValue, setInputValue] =useState({})
-    
+    const [formErrors, setFormErrors] = useState<FormErrors>({}) 
     const mutationAccount = useMutation({
         mutationFn: (user : User ) => register(user),
         onSuccess() {
@@ -21,26 +27,72 @@ const SignUpUser = () => {
         
     })
 
-    const onChange = (e:any) =>{
-        const {name, value} = e.target;
-        setInputValue({
-            ...inputValue,
-            [name]:value
-        })
-    }
+    const onChange = (e: any) => {
+        const { name, value } = e.target;
+        setInputValue((prevInputValue) => ({
+          ...prevInputValue,
+          [name]: value,
+        }));
+      };
+      
+      useEffect(() => {
+        const errors = validate(inputValue);
+        setFormErrors(errors);
+      }, [inputValue]);
+      
     
 
-    const onSubmit = (e:any) =>{
-        e.preventDefault()
-        mutationAccount.mutate(inputValue as User )
-    }
+    
+
+      const validate = (values: any) => {
+        let errors: any = {};
+      
+        if (!values.name) {
+          errors.name = 'Name is required';
+        }
+      
+        if (!values.email) {
+          errors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+          errors.email = 'Email is invalid';
+        }
+      
+        if (!values.password) {
+          errors.password = 'Password is required';
+        } else if (values.password.length < 6) {
+          errors.password = 'Password must be at least 6 characters';
+        }
+      
+        if (!values.mobile) {
+          errors.mobile = 'Mobile is required';
+        } else if (!/^\d+$/.test(values.mobile)) {
+          errors.mobile = 'Mobile must contain only numbers';
+        }
+      
+        return errors;
+      };
+      
+      const onSubmit = (e: any) => {
+        e.preventDefault();
+        const errors = validate(inputValue);
+        console.log('onSubmit - inputValue:', inputValue);
+        console.log('onSubmit - errors:', errors);
+        
+        if (Object.keys(errors).length === 0) {
+          mutationAccount.mutate(inputValue as User);
+        } else {
+          console.log('Setting form errors:', errors);
+          setFormErrors(errors);
+        }
+      };
+      
 
   return (
     <>
        <div className="flex flex-col h-screen bg-gray-100">
     <div className="grid place-items-center mx-2 my-20 sm:my-auto">
        
-    
+
     
         <div className="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
             px-6 py-10 sm:px-10 sm:py-6 
@@ -59,8 +111,10 @@ const SignUpUser = () => {
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     onChange={onChange} 
                     
-                    required />
-
+                     />
+                   {formErrors.name && (
+  <span className="text-red-500 text-sm">{formErrors.name}</span>
+)}
                 <label htmlFor="email" className="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
                 <input id="email" type="email" name="email" placeholder="e-mail address" autoComplete="email"
                     className="block w-full py-3 px-1 mt-2 
@@ -69,8 +123,10 @@ const SignUpUser = () => {
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     onChange={onChange} 
 
-                    required />
-
+                     />
+{formErrors.email && (
+  <span className="text-red-500 text-sm">{formErrors.email}</span>
+)}
                 <label htmlFor="password" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
                 <input id="password" type="password" name="password" placeholder="password" autoComplete="current-password"
                     className="block w-full py-3 px-1 mt-2 mb-4
@@ -78,8 +134,11 @@ const SignUpUser = () => {
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     onChange={onChange} 
-
-                    required />
+                   
+                     />
+                      {formErrors.password && (
+                        <span className="text-red-500 text-sm">{formErrors.password}</span>
+                      )}
 
             <label htmlFor="mobile" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Mobile</label>
                 <input id="mobile" type="number" name="mobile" placeholder="mobile" autoComplete="current-mobile"
@@ -89,8 +148,10 @@ const SignUpUser = () => {
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                     onChange={onChange} 
 
-                    required />
-
+                     />
+ {formErrors.mobile && (
+                        <span className="text-red-500 text-sm">{formErrors.mobile}</span>
+                      )}
         
 
                 <button type="submit"
