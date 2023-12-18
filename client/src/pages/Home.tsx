@@ -5,7 +5,7 @@ import { IProduct } from '../interface/User';
 import { Link } from 'react-router-dom';
 const Home = () => {
 
-  const {products,mutationGetCategory,categories} = useContext(ProductShopContext)
+  const {products,mutationGetCategory,categories, isLoading, isError} = useContext(ProductShopContext)
   const [selectCategoryId, setSelectCategoryId] = useState(null)
 
   console.log("category ", categories);
@@ -18,7 +18,8 @@ const Home = () => {
   const filterProduct = selectCategoryId ? products?.message?.filter((product:IProduct) => product.category === selectCategoryId) : products?.message
   
   
-  
+  if(isError)  throw new Error("failed")
+  if(isLoading) return <div>Loading...</div>
   
   
 

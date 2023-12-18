@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { ProductShopContext } from '../Context/ProductContext'
 const ListProduct = () => {
 
-  const {products, isError, isLoading, mutationDelete} = useContext(ProductShopContext)
+  const {user,products, isError, isLoading, mutationDelete} = useContext(ProductShopContext)
   console.log('product', products);
   
   const handleDeleteProduct = (_id :any) => {
@@ -21,6 +21,12 @@ const ListProduct = () => {
   }
   if(isError){
     throw new Error("Something wrong")
+  }
+
+  if (user?.response?.role !== 'admin') {
+    return <div className='flex items-center justify-center w-full'>
+      <h2 className='text-red-600'>Chỉ có admin mới xem được trang này.</h2>
+    </div>;
   }
 
   return (

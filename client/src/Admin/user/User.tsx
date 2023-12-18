@@ -22,6 +22,12 @@ const User = () => {
     throw new Error("Something wrong")
   }
 
+  if (user?.response?.role !== 'admin') {
+    return <div className='flex items-center justify-center w-full'>
+      <h2 className='text-red-600'>Chỉ có admin mới xem được trang này.</h2>
+    </div>;
+  }
+
   return (
     <>
       <div className="py-1 bg-blueGray-50 w-full " style={{marginTop:"-80px"}}>
