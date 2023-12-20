@@ -4,8 +4,9 @@ import { ProductShopContext } from '../../Context/ProductContext';
 
 const User = () => {
 
-  const {user, isError, isLoading,mutationDeleteUser} = useContext(ProductShopContext)
+  const {user, isError, isLoading,mutationDeleteUser,userDetail} = useContext(ProductShopContext)
   console.log('user : ', user);
+  console.log('userDetail : ', userDetail);
   
   const handleDeleteUser = (_id :any) => {
     const isConfirmed = window.confirm('Bạn có muốn xóa người dùng này không?');
@@ -22,7 +23,7 @@ const User = () => {
     throw new Error("Something wrong")
   }
 
-  if (user?.response?.role !== 'admin') {
+  if (userDetail?.response?.role !== 'admin') {
     return <div className='flex items-center justify-center w-full'>
       <h2 className='text-red-600'>Chỉ có admin mới xem được trang này.</h2>
     </div>;
