@@ -5,7 +5,7 @@ import {  createProduct, deleteProduct, getAllProduct, getDetailProduct, updateP
 const routerPoduct = Router();
 
 routerPoduct.post('/createProduct',verifyAccessToken, isAdmin, createProduct)
-routerPoduct.get('/',verifyAccessToken,isAdmin, getAllProduct)
+routerPoduct.get('/', getAllProduct)
 routerPoduct.get('/:id', getDetailProduct)
 routerPoduct.delete('/:id',verifyAccessToken, isAdmin, deleteProduct)
 routerPoduct.put('/:id',verifyAccessToken, isAdmin, updateProduct)
