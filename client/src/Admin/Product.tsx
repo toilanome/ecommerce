@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { ProductShopContext } from '../Context/ProductContext'
 const ListProduct = () => {
 
-  const {user,products, isError, isLoading, mutationDelete,userDetail} = useContext(ProductShopContext)
+  const {products, isError, isLoading, mutationDelete,userDetail} = useContext(ProductShopContext)
   console.log('product', products);
   
   const handleDeleteProduct = (_id :any) => {
