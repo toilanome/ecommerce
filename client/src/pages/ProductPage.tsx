@@ -10,6 +10,7 @@ const ProductPage = () => {
   const [fillterProduct , setFillterProduct] = useState([])
 
   const handleSearch = (query: any) =>{
+    
     const fillter = products?.message?.filter((product:any) => product.title.toLowerCase().includes(query.toLowerCase()))
     setFillterProduct(fillter)
   }

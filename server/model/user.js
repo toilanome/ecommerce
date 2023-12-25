@@ -21,15 +21,29 @@ var userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    confirmPassword:{
+        type:String,
+        required:true,
+    },
     role:{
         type:String,
         default : 'user'
     },
-    cart:[{
-        product : {type : mongoose.Types.ObjectId, ref : 'Product'},
-        quantity:Number,
-        color: String,
-        total:Number
+        cart:[{
+            product : {type : mongoose.Types.ObjectId, ref : 'Product'},
+            quantity:Number,
+            color: String,
+            total:Number
+        }],
+    bill:[{
+        orderId : {type : mongoose.Types.ObjectId, ref : 'Order'},
+        products: [{
+            product : {type : mongoose.Types.ObjectId, ref : 'Product'},
+            quantity: Number,
+            color: String,
+            total: Number,
+        }],
+        orderDate: { type: Date, default: Date.now },
     }],
     address: { type:Array, default : []},
     wishlist: [

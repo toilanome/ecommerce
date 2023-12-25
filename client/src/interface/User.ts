@@ -3,7 +3,7 @@ export interface User{
     name: string,
     email:string,
     mobile:string,
-    password:string
+    password:string,
 }
 
 export interface IProduct{

@@ -22,7 +22,8 @@ export const register =   asyncHandler(async(req,res) =>{
     const hashPassword = await bcrypt.hash(password , 10)
     const response = await  User.create({
         ...req.body,
-        password : hashPassword
+        password : hashPassword,
+        bill:[]
     })
     return res.status(200).json({
         message :  response ? "Đăng kí thành công" : "Đăng kí thất bại",
