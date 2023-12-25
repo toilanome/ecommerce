@@ -2,6 +2,7 @@ import  { useContext,useState } from "react";
 import Brum from "../Components/Brum/Brum";
 import { ProductShopContext } from "../Context/ProductContext";
 import { Link } from "react-router-dom";
+import Loading from "../Components/Loading";
 
 const ProductPage = () => {
   const { products, isError, isLoading } =
@@ -9,6 +10,7 @@ const ProductPage = () => {
   console.log("product", products);
   const [fillterProduct , setFillterProduct] = useState([])
 
+  if(isLoading) return <Loading />
   const handleSearch = (query: any) =>{
     
     const fillter = products?.message?.filter((product:any) => product.title.toLowerCase().includes(query.toLowerCase()))
@@ -16,7 +18,7 @@ const ProductPage = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />
   }
   if (isError) {
     throw new Error("Something wrong");

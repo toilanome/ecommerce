@@ -19,10 +19,14 @@ const ProductDetail = () => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
 
+  
+
+
   const mutationAddToCart = useMutation(
     async () => {
       try {
-        // Assuming pid is the product ID
+        // Assuming 
+      
         const updateToCart = await updateCart({
           pid: id,
           quantity: selectedQuantity || 1,
@@ -38,10 +42,15 @@ const ProductDetail = () => {
         toast.success("Thêm sản phẩm thành công")
         queryClient.invalidateQueries();
       },
+      onError: () => {
+        toast.error("Vui lòng đăng ký tài khoản")
+      },
     }
   );
 
   const handleAddToCart = async () => {
+    const token = localStorage.getItem('AccessToken')
+    if(!token) return toast.error("Vui lòng tạo tài khoản ")
     await mutationAddToCart.mutateAsync();
     console.log('thêm thành công');
   };
@@ -62,7 +71,7 @@ const ProductDetail = () => {
 
                 <div className="info ">
                   <div>
-                    <span>{data?.title}</span>
+                    <span className="text-base font-bold">{data?.title}</span>
 
                     <div className="mb-3 mt-3">
                       <h2>{data?.brand}</h2>

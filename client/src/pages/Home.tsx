@@ -18,8 +18,6 @@ const Home = () => {
   const filterProduct = selectCategoryId ? products?.message?.filter((product:IProduct) => product.category === selectCategoryId) : products?.message
   
   
-  if(isError)  throw new Error("failed")
-  if(isLoading) return <div>Loading...</div>
   
   
 
