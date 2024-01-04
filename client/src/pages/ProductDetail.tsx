@@ -71,16 +71,15 @@ const ProductDetail = () => {
 
                 <div className="info ">
                   <div>
-                    <span className="text-base font-bold">{data?.title}</span>
+                    <span className="text-xl font-medium">{data?.title}</span>
 
                     <div className="mb-3 mt-3">
-                      <h2>{data?.brand}</h2>
+                      <h2 className="text-lg font-normal">{data?.brand}</h2>
                     </div>
 
              
-                    <br />
-                    <div className="w-64 mb-5">
-                      <p>
+                    <div className="w-64 ">
+                      <p className="text-base">
                         {data?.description}
                       </p>
                     </div>
@@ -97,7 +96,7 @@ const ProductDetail = () => {
                     </select>
                     <br />
                     <div className="mt-5">
-                      Quanlity :  <input type="number" defaultValue={1} onChange={(e) => setSelectedQuantity(Number(e.target.value))}  />
+                      Quanlity :  <input className="w-1/4 border border-gray-300 rounded-md hover:border-gray-800" type="number" defaultValue={1} onChange={(e) => setSelectedQuantity(Number(e.target.value))}  />
                     </div>
                     <br />
                     <span> Price : {data?.price} VNĐ</span>
