@@ -8,7 +8,7 @@ const routerCategory = Router();
 routerCategory.post('/',verifyAccessToken, createCategory)
 routerCategory.get('/allCategory', getAllCategories)
 routerCategory.get('/detail/:id', getDetailCategories)
-routerCategory.put('/updateCategory',verifyAccessToken, updateCategory)
+routerCategory.put('/updateCategory/:id',verifyAccessToken, updateCategory)
 routerCategory.delete('/deleteCategory/:id',verifyAccessToken,isAdmin, deleteCategory)
 
 
