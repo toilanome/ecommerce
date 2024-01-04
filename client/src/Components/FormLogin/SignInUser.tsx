@@ -1,9 +1,7 @@
-import  { useEffect, useState } from 'react'
-import { useMutation, useQueryClient } from 'react-query'
-import { Link, useNavigate } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { Link } from 'react-router-dom'
 import { login } from '../../api/User'
 import {toast} from 'react-toastify'
-import { User } from '../../interface/User'
 import { useFormik } from 'formik'
 interface FormErrors {
     email?: string;
