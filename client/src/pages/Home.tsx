@@ -5,7 +5,7 @@ import { IProduct } from '../interface/User';
 import { Link } from 'react-router-dom';
 const Home = () => {
 
-  const {products,mutationGetCategory,categories, isLoading, isError} = useContext(ProductShopContext)
+  const {products,mutationGetCategory,categories} = useContext(ProductShopContext)
   const [selectCategoryId, setSelectCategoryId] = useState(null)
 
   console.log("category ", categories);

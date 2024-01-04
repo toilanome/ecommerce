@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../api/User";
